@@ -1,40 +1,45 @@
 package dis.will.be.epic.sauce;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import static dis.will.be.epic.sauce.CardColor.*;
+import static dis.will.be.epic.sauce.Rule.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CardColorTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @Test
-    public void card_ShouldHaveAColor() {
-        Card card = new Card(CardColor.BLUE, 5);
-        Assertions.assertThat(card.getCardColor()).isEqualTo(CardColor.BLUE);
+    public void redHasHighestWinsRule() {
+        assertThat(RED.getRule()).isEqualTo(HIGHEST_CARD_WINS);
     }
 
     @Test
-    public void card_ShouldHaveAValue() {
-        Card card = new Card(CardColor.BLUE, 5);
-        Assertions.assertThat(card.getValue()).isEqualTo(5);
+    public void orangeHasMostOfOneNumberWinsRule() {
+        assertThat(ORANGE.getRule()).isEqualTo(MOST_OF_ONE_NUMBER_WINS);
     }
 
     @Test
-    public void card_GivenValueLowerThan1_ThenThrowException() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Card value should be between 1 and 7");
-
-        new Card(CardColor.BLUE, 0);
+    public void yellowHasMostOfOneColorWinsRule() {
+        assertThat(YELLOW.getRule()).isEqualTo(MOST_OF_ONE_COLOR_WINS);
     }
 
     @Test
-    public void card_GivenValueHigherThan7_ThenThrowException() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Card value should be between 1 and 7");
+    public void greenHasMostEvenCardsWinsRule() {
+        assertThat(GREEN.getRule()).isEqualTo(MOST_EVEN_CARDS_WINS);
+    }
 
-        new Card(CardColor.BLUE, 8);
+    @Test
+    public void blueHasMostDifferentColorsWinsRule() {
+        assertThat(BLUE.getRule()).isEqualTo(MOST_DIFFERENT_COLORS_WINS);
+    }
+
+    @Test
+    public void indigoHasMostCardsInARowWinsRule() {
+        assertThat(INDIGO.getRule()).isEqualTo(MOST_CARDS_IN_A_ROW_WINS);
+    }
+
+    @Test
+    public void violetHasMostCardsBelow4WinsRule() {
+        assertThat(VIOLET.getRule()).isEqualTo(MOST_CARDS_BELOW_4_WINS);
     }
 }
